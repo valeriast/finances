@@ -13,10 +13,9 @@ function AuthProvider({children}){
 
     useEffect(()=>{
         async function loadStorage(){
-
             const token = await AsyncStorage.getItem(`@finToken`)
             if (token){
-                const response = api.get('/me',{
+                const response = await api.get('/me',{
                     headers:{
                         'Authorization': `Bearer ${token}`
                     }
@@ -27,7 +26,6 @@ function AuthProvider({children}){
 
                 api.defaults.headers['Authorization'] = `Bearer ${token}`
                 setUser(response.data)
-                
             }
 
             setLoading(false)
