@@ -14,11 +14,11 @@ function AuthProvider({children}){
     useEffect(()=>{
         async function loadStorage(){
 
-            const storageUser = await AsyncStorage.getItem(`@finToken`)
-            if (storageUser){
+            const token = await AsyncStorage.getItem(`@finToken`)
+            if (token){
                 const response = api.get('/me',{
                     headers:{
-                        'Authorization': `Bearer ${storageUser}`
+                        'Authorization': `Bearer ${token}`
                     }
                 })
                 .catch(()=>{
@@ -34,7 +34,7 @@ function AuthProvider({children}){
         }
 
         loadStorage()
-    })
+    },[])
 
 
     async function signUp(name, email, password){
@@ -86,6 +86,13 @@ function AuthProvider({children}){
             setLoadingAuth(false)
         }
     }
+
+    async function signOut(){
+        await AsyncStorage.clear()
+        .then(()=>{
+            setUser(null)
+        })
+    }
     
     return(
         <AuthContext.Provider value={{ 
@@ -93,6 +100,7 @@ function AuthProvider({children}){
                 user, 
                 signUp, 
                 signIn, 
+                signOut,
                 loadingAuth,
                 loading
             }}>
