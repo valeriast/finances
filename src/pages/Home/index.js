@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-
+import { useFocusEffect } from '@react-navigation/native';
 import { AuthContext } from '../../contexts/auth';
 
 import api from '../../services/api'
@@ -14,11 +14,12 @@ import { useIsFocused } from '@react-navigation/native';
 
 
 export default function Home() {
-  const isFocused = useIsFocused()
   const [listBalance, setListBalance] = useState([])
   const [dateMovements, setDateMovements] = useState(new Date())
-  useEffect(()=>{
-    let isActive = true;
+  const isFocused = useIsFocused()
+  
+  useFocusEffect( React.useCallback(()=>{
+    
     async function getMovements(){
       let dateFormated = format(dateMovements, 'dd/MM/yyyy');
 
@@ -27,16 +28,12 @@ export default function Home() {
           date: dateFormated 
         }
       })
-      if(isActive){
-        setListBalance(balance.data);
-      }
+      setListBalance(balance.data);
     }
 
-    getMovements();
+    getMovements()
 
-    return () => isActive = false;
-
-  }, [])
+  }, []) )
 
  return (
    <Background>
