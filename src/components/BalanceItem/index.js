@@ -21,7 +21,6 @@ export default function BalanceItem({ data }) {
             }
         }
     },[data])
-    console.log(data)
     return (
    <Container bg={labelName.color}>
     <Label>{labelName.label} </Label>
