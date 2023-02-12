@@ -1,11 +1,11 @@
 # Finance App
 
-The purpose of this app is to help people register their incomes and outcomes. 
+The purpose of this app is to help users to register their incomes and outcomes. 
 - The user should be able to register an income or outcome
-- The register should be listed in the home screen
+- The activity should be listed in the home screen
 - The totals for income, outcome and balance should be displayed on the home screen
 - The user should be able to change the date to see old movements
-- The user should be able to delete a activity 
+- The user should be able to delete an activity 
 - The user should have acces to a profile screen
 - The user should be able to login and logoff and also keep the login active after closing the app
 
